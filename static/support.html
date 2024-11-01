@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orchids customer support</title>
+</head>
+<body>
+    <h2>Contact Customer Support</h2>
+    <form id="supportForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="issue">Support Issue:</label><br>
+        <textarea id="issue" name="issue" rows="5" required></textarea><br><br>
+
+        <button type="submit">Send Support Request</button>
+    </form>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your user ID
+        emailjs.init("dy64Sy4Cg_JP6mfv1");  // Replace YOUR_USER_ID with your actual user ID from EmailJS
+
+        // Form submission event
+        document.getElementById("supportForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const issue = document.getElementById("issue").value;
+
+            // Define the email parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: issue
+            };
+
+            // Send the email
+            emailjs.send("service_tacvv41", "template_lhaifpc", templateParams)
+                .then(response => {
+                    alert("Support request sent successfully!");
+                })
+                .catch(error => {
+                    alert("Failed to send support request. Please try again.");
+                    console.error("EmailJS Error:", error);
+                });
+        });
+    </script>
+</body>
+</html>
